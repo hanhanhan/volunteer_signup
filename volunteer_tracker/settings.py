@@ -129,3 +129,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 SITE_ID = 1
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'volunteers.Volunteer'

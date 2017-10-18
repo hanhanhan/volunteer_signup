@@ -2,5 +2,14 @@
 
 {% block content %}
 Hey {{ request.user }}!
-You're signed up to volunteer for stuff.
+
+	{% if request.user.logged_hours == 0 %}
+	We look forward to you volunteering with us.
+
+	{% else %}
+	Volunteer hours so far: {{ request.user.logged_hours }}
+	Thank you!
+	{% endif %}
+
+
 {% endblock %}
