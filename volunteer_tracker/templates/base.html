@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Volunteer! Girl Develop It - LA{% endblock %}</title>
+</head>
+<body>
+{% block login %}
+    <div>
+      <strong>Menu:</strong>
+      <ul>
+		{% if user.is_authenticated %}
+		<li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+		<li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+		{% else %}
+		<li><a href="{% url 'account_login' %}">Sign In</a></li>
+		<li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+		{% endif %}
+      </ul>
+{% endblock%}
+{% block content %}{% endblock %}
+</body>
+</html>

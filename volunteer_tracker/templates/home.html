@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+	<ul>
+	{% for event in events %}
+	{# event name, link, date/time, location, link to volunteer #}
+		<li>{{ event }} Volunteer</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

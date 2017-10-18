@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
+    # local
+    'events',
+    'volunteers',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +56,8 @@ ROOT_URLCONF = 'volunteer_tracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # is there a better way than hard coding app name?
+        'DIRS': [os.path.join(BASE_DIR, 'volunteer_tracker', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,7 +116,7 @@ AUTHENTICATION_BACKENDS = (
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC' # 'America/Los_Angeles'?
 
 USE_I18N = True
 
