@@ -1,4 +1,5 @@
 from django.db import models
+from volunteers.models import Volunteer
 
 
 class Event(models.Model):
@@ -15,6 +16,13 @@ class Event(models.Model):
 	yes_rsvp_count = models.SmallIntegerField(null=True)
 	volunteers_requested = models.SmallIntegerField(null=True)
 	volunters_signedup = models.SmallIntegerField(default=0)
+	volunteer_skills_desc = models.TextField(default='')
+	# volunteers = models.ManyToManyField(
+ #        'volunteers.Volunteer',
+ #        through='Event_Volunteer',
+ #        through_fields=('username'),
+ #    )
+
 
 	def __str__(self):
 		return self.name
@@ -37,3 +45,11 @@ class Venue(models.Model):
 	city = models.CharField(max_length=50, default='')
 	country = models.CharField(max_length=50, default='')
 	state = models.CharField(max_length=50, default='')
+
+
+class Event_Volunteer(models.Model):
+	event = models.ForeignKey(Event, on_delete=models.CASCADE)
+	volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
+	showed = models.BooleanField()
+	late_cancel = models.BooleanField()
+

@@ -14,8 +14,6 @@ def sync_events():
 	for event_json in json:
 		event_serializer = EventSerializer(data=event_json)
 
-		# check if it's in the database to know whether to call save() with event object for update
-
 		if event_serializer.is_valid():
 			event = event_serializer.save()
 		else:
