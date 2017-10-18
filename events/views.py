@@ -1,9 +1,20 @@
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
+from .models import Event
 
 
 def home(request):
-	context = {'events': [1, 3, 7]}
-	return render(request, template_name='home.html', context=context)
+	
+	return render(request, 'home.html')
 
-def login(request):
-	return render(request, template='login.html')
+
+def events(request):
+	return render(request, 'events.html')
+
+
+
+
+
+
