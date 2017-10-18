@@ -1,0 +1,1 @@
+A beginning stages app to read event data from the Meetup API for the Girl Develop It group, and allow users to sign up to volunteer in support of events.
