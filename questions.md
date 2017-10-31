@@ -23,3 +23,21 @@ https://docs.djangoproject.com/en/1.11/topics/db/models/#intermediary-manytomany
 Your intermediate model must contain one - and only one - foreign key to the source model - does it matter which?
 
 # is my many to many table ok? urg circular imports
+
+
+<!--  -->
+nested json
+better ways to figure stuff out
+
+
+customize default templates
+
+---
+shortcut to see json nice in sublime prettyjson
+ipdb
+jump to definition
+api star
+sublime snippets
+python slack
+var(x) instead of dir(x)
+

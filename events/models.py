@@ -4,7 +4,8 @@ from volunteers.models import Volunteer
 
 class Event(models.Model):
 	# these are the fields of interest from the Meetup API events endpoint
-	# id is alphanumeric unique identifier per meetup API
+	# id is alphanumeric unique identifier per meetup API, not necessarily integer
+	# bad idea to use id keyword? if changed, serializer needs customization
 	id = models.IntegerField(primary_key=True)
 	link = models.URLField(max_length=200)
 	name = models.CharField(max_length=200)
@@ -17,6 +18,7 @@ class Event(models.Model):
 	volunteers_requested = models.SmallIntegerField(null=True)
 	volunters_signedup = models.SmallIntegerField(default=0)
 	volunteer_skills_desc = models.TextField(default='')
+
 	# volunteers = models.ManyToManyField(
  #        'volunteers.Volunteer',
  #        through='Event_Volunteer',
@@ -51,5 +53,6 @@ class Event_Volunteer(models.Model):
 	event = models.ForeignKey(Event, on_delete=models.CASCADE)
 	volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
 	showed = models.BooleanField()
-	late_cancel = models.BooleanField()
+	signup_date = models.DateTimeField(auto_now_add=True)
+	cancel_date = models.DateTimeField(null=True)
 

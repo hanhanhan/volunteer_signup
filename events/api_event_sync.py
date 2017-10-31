@@ -1,17 +1,29 @@
+import json
 import logging
+import os
 import requests
 from .serializer import EventSerializer, FeeSerializer, VenueSerializer
-from .models import Event, Fee, Venue
 
 
+JSON_FILE = 'events.json'
 URL = "https://api.meetup.com/Girl-Develop-It-Los-Angeles/events"
 logger = logging.getLogger(__name__)
 
 
-def sync_events():
+def get_event_data():
 	r = requests.get(URL)
-	json = r.json()
-	for event_json in json:
+	with open(JSON_FILE, 'w') as f:
+		json.dump(r.json(), f)
+
+
+def sync_events():
+	if not os.path.exists(JSON_FILE):
+		get_event_data()
+
+	with open('events.json', 'rb') as f:
+		events_json = json.load(f)
+
+	for event_json in events_json:
 		event_serializer = EventSerializer(data=event_json)
 
 		if event_serializer.is_valid():
@@ -32,3 +44,6 @@ def sync_events():
 			fee_serializer.initial_data['event'] = event.id
 			if fee_serializer.is_valid():
 				fee_serializer.save()
+
+if __name__ == '__main__':
+	sync_events()

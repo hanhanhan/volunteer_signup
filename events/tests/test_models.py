@@ -1,6 +1,7 @@
 from django.test import TestCase
 from events.models import Event, Fee, Venue
 from events.serializer import EventSerializer, FeeSerializer, VenueSerializer
+from rest_framework.parsers import JSONParser
 # from settings import BASE_DIR
 import json
 import os
@@ -15,11 +16,19 @@ class EventModelTest(TestCase):
 
 		file_path = os.path.join(self.test_dir, 'event_no_fee_no_venue.json')
 
-		with open(file_path) as f:
-			event_no_fee_no_venue = json.load(f)
+		# is the documentation's function really better than just json.load? 
+
+		# with open(file_path, 'rb') as f:
+		# 	import ipdb; ipdb.set_trace()
+		# 	# event_no_fee_no_venue = json.load(f)
+		# 	event_no_fee_no_venue = json.load(f)
+
+		with open(file_path, 'rb') as f:
+			event_no_fee_no_venue = JSONParser().parse(f)
 
 		event = EventSerializer(data=event_no_fee_no_venue)
 		# way to see event.errors()?
+		import ipdb; ipdb.set_trace()
 		self.assertTrue(event.is_valid())
 		event = event.save()
 		self.assertIsInstance(event, Event)
@@ -36,7 +45,14 @@ class EventModelTest(TestCase):
 		fee = fee.save()
 		self.assertIsInstance(fee, Fee)
 
-	
+"""
+serializers.py
+save()
+203         validated_data = dict(
+204             list(self.validated_data.items()) +
+205             list(kwargs.items())
+206         )
+"""
 
 
 

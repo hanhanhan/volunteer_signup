@@ -2,25 +2,6 @@ from rest_framework import serializers
 from .models import Event, Fee, Venue
 
 
-class EventSerializer(serializers.Serializer):
-
-	class Meta:
-		model = Event
-		fields = ('id', 'link', 'name', 'description', 'duration', 'rsvp_limit', 'time', 'waitlist_count', 'yes_rsvp_count')
-
-
-	def create(self, validated_data):
-		return Event.objects.create(**validated_data)
-
-	def update(self, instance, validated_data):
-		instance.id = validated_data.get('id', instance.id)
-		instance.link = validated_data.get('link', instance.link)
-		instance.name = validated_data.get('name', instance.name)
-		instance.description = validated_data.get('description', instance.description)
-		instance.save()
-		return instance
-
-
 class FeeSerializer(serializers.ModelSerializer):
 
 	class Meta:
@@ -37,6 +18,28 @@ class FeeSerializer(serializers.ModelSerializer):
 		instance.currency = validated_data.get('currency', instance.link)
 		instance.save()
 		return instance
+
+
+class EventSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Event
+		fee = FeeSerializer(required=False)
+		fields = ('id', 'link', 'name', 'description', 'duration', 'rsvp_limit', 'time', 'waitlist_count', 'yes_rsvp_count')
+
+	def create(self, validated_data):
+		
+		fee = Fee.objects.create()
+		return Event.objects.create(**validated_data)
+
+	def update(self, instance, validated_data):
+		instance.id = validated_data.get('id', instance.id)
+		instance.link = validated_data.get('link', instance.link)
+		instance.name = validated_data.get('name', instance.name)
+		instance.description = validated_data.get('description', instance.description)
+		instance.save()
+		return instance
+
 
 
 class VenueSerializer(serializers.ModelSerializer):
