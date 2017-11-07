@@ -7,3 +7,8 @@ def home(request):
 	events = Event.objects.all()
 	context['events'] = events
 	return render(request, 'home.html', context=context)
+
+
+def event(request):
+	pass
+

@@ -45,5 +45,6 @@ def sync_events():
 			if fee_serializer.is_valid():
 				fee_serializer.save()
 
+
 if __name__ == '__main__':
 	sync_events()

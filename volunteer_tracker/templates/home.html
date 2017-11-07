@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
+{% load event_extras %}
 {% block content %}
-	<ul>
+	<dl>
 	{% for event in events %}
 	{# event name, link, date/time, location, link to volunteer #}
-		<li>{{ event }} Volunteer</li>
+		<li>
+			<a href="{{ event.link }}">{{ event }}</a>
+		 	<br>
+		 	On {{event | epoch_to_datetime }} {{event.time}} Volunteer
+		 	<br>{{event.venue}} 
+		</li>
+
 	{% endfor %}
-	</ul>
+	</dl>
 {% endblock %}

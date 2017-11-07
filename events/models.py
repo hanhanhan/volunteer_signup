@@ -18,6 +18,10 @@ class Event(models.Model):
 	volunteers_requested = models.SmallIntegerField(null=True)
 	volunters_signedup = models.SmallIntegerField(default=0)
 	volunteer_skills_desc = models.TextField(default='')
+	local_date = models.CharField(max_length=20)
+	local_time = models.CharField(max_length=20)
+	updated = models.PositiveIntegerField(null=True)
+	utc_offset = models.PositiveIntegerField(null=True)	
 
 	# volunteers = models.ManyToManyField(
  #        'volunteers.Volunteer',

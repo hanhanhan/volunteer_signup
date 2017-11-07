@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>{% block title %}Volunteer! Girl Develop It - LA{% endblock %}</title>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 </head>
+
 <body>
+<div class="container">
 {% block login %}
     <div>
       <strong>Menu:</strong>
@@ -16,7 +26,30 @@
 		<li><a href="{% url 'account_signup' %}">Sign Up</a></li>
 		{% endif %}
       </ul>
+      </div>
 {% endblock%}
+
+<div class="container">
 {% block content %}{% endblock %}
+</div>
+<!-- 
+Show components requiring JavaScript
+	Alerts for dismissing
+	Buttons for toggling states and checkbox/radio functionality
+	Carousel for all slide behaviors, controls, and indicators
+	Collapse for toggling visibility of content
+	Dropdowns for displaying and positioning (also requires Popper.js)
+	Modals for displaying, positioning, and scroll behavior
+	Navbar for extending our Collapse plugin to implement responsive behavior
+	Tooltips and popovers for displaying and positioning (also requires Popper.js)
+	Scrollspy for scroll behavior and navigation updates
+ -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+
 </body>
+
 </html>
