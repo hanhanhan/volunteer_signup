@@ -7,55 +7,42 @@ import json
 import os
 
 
-class EventModelTest(TestCase):
+class EventDeserializationTest(TestCase):
 
 	def setUp(self):
 		test_dir = os.path.dirname(__file__)
 		file_path = os.path.join(test_dir, 'event_no_fee_no_venue.json')
+
+		# QUESTION: is the REST Framework jsonparser function preferable to json.load? 
 		with open(file_path, 'rb') as f:
 			self.event_no_fee_no_venue = JSONParser().parse(f)
 
 		file_path = os.path.join(test_dir, 'event_with_fee.json')
 		with open(file_path, 'rb') as f:
 			self.event_with_fee = JSONParser().parse(f)
-		
+
 		file_path = os.path.join(test_dir, 'event_with_venue.json')
 		with open(file_path, 'rb') as f:
 			self.event_with_venue = JSONParser().parse(f)
 
-		
-
 	def test_event_serialization_no_fee_no_venue(self):
-
-		
-
-		# is the documentation's function really better than just json.load? 
-
-		# with open(file_path, 'rb') as f:
-		# 	import ipdb; ipdb.set_trace()
-		# 	# event_no_fee_no_venue = json.load(f)
-		# 	event_no_fee_no_venue = json.load(f)
-
-
-
-		event = EventSerializer(data=event_no_fee_no_venue)
-		# way to see event.errors()?
-		import ipdb; ipdb.set_trace()
-		self.assertTrue(event.is_valid())
-		event = event.save()
+		serializer = EventSerializer(data=self.event_no_fee_no_venue)
+		self.assertTrue(serializer.is_valid(), 
+			msg=f'EventSerializer error: {serializer.errors}')
+		event = serializer.save()
 		self.assertIsInstance(event, Event)
 
-	def test_fee_serialization(self):
+	def test_event_with_fee_serialization(self):
+		serializer = EventSerializer(data=self.event_with_fee)
+		self.assertTrue(serializer.is_valid(), msg=f'FeeSerializer error: {serializer.errors}')
+		event = serializer.save()
+		self.assertIsInstance(event, Event)
 
-		file_path = os.path.join(self.test_dir, 'event_with_fee.json')
-		with open(file_path) as f:
-			event_with_fee = json.load(f)
-
-		fee = FeeSerializer(data=event_with_fee)
-		# way to see event.errors()?
-		self.assertTrue(fee.is_valid(), msg=f'Serializer error: {fee.errors}')
-		fee = fee.save()
-		self.assertIsInstance(fee, Fee)
+	def test_event_with_venue_serialization(self):
+		serializer = EventSerializer(data=self.event_with_venue)
+		self.assertTrue(serializer.is_valid(), msg=f'Serializer error: {serializer.errors}')
+		event = serializer.save()
+		self.assertIsInstance(event, Event)
 
 """
 serializers.py
