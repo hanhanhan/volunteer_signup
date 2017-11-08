@@ -3,6 +3,8 @@ from .models import Event, Fee, Venue
 
 
 class FeeSerializer(serializers.ModelSerializer):
+	event = serializers.PrimaryKeyRelatedField()
+	# event = serializers.OneToOneField()
 
 	class Meta:
 		model = Fee
@@ -10,6 +12,8 @@ class FeeSerializer(serializers.ModelSerializer):
 
 
 class VenueSerializer(serializers.ModelSerializer):
+	# event = serializers.OneToOneField()
+	event = serializers.PrimaryKeyRelatedField()
 
 	class Meta:
 		model = Venue
@@ -30,10 +34,12 @@ class EventSerializer(serializers.ModelSerializer):
 
 		if 'fee' in validated_data.keys():
 			fee_data = validated_data.pop('fee')
+			# fee_data = validated_data['fee']
 			fee = True
 
 		if 'venue' in validated_data.keys():
 			venue_data = validated_data.pop('venue')
+			# venue_data = validated_data['venue']
 			venue = True
 
 		event = Event.objects.create(**validated_data)

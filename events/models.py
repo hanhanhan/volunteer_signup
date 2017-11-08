@@ -43,8 +43,8 @@ class Fee(models.Model):
 class Venue(models.Model):
 	event = models.OneToOneField(to=Event, on_delete=models.CASCADE, primary_key=True, related_name='venue')
 	name = models.CharField(max_length=200)
-	lat = models.DecimalField(decimal_places=14, max_digits=17)
-	lon = models.DecimalField(decimal_places=14, max_digits=17)
+	lat = models.DecimalField(decimal_places=20, max_digits=25)
+	lon = models.DecimalField(decimal_places=20, max_digits=25)
 	address_1 = models.CharField(max_length=200, default='')
 	address_2 = models.CharField(max_length=200, default='')
 	address_3 = models.CharField(max_length=200, default='')
