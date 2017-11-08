@@ -6,7 +6,7 @@ class FeeSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Fee
-		fields = ('amount', 'currency')
+		fields = '__all__'
 
 	# link to event?
 	# def create(self, validated_data, event):
@@ -25,7 +25,7 @@ class EventSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Event
 		fee = FeeSerializer(required=False)
-		fields = ('id', 'link', 'name', 'description', 'duration', 'rsvp_limit', 'time', 'waitlist_count', 'yes_rsvp_count')
+		fields = '__all__'
 
 	def create(self, validated_data):
 		
@@ -46,7 +46,8 @@ class VenueSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Venue
-		fields = ('name', 'lat', 'lon', 'address_1', 'address_2', 'address_3', 'city', 'country', 'state')
+		fields = '__all__'
+
 
 	# link to event?
 	def create(self, validated_data):
