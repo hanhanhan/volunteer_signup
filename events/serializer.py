@@ -17,12 +17,11 @@ class VenueSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
+	fee = FeeSerializer(required=False)
+	venue = VenueSerializer(required=False)
 
 	class Meta:
 		model = Event
-		# event_id = serializers.IntegerField(source='id')
-		fee = FeeSerializer(required=False)
-		venue = VenueSerializer(required=False)
 		fields = '__all__'
 
 	def create(self, validated_data):
@@ -49,12 +48,4 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 	# def update(self, instance, validated_data):
-	# 	instance.id = validated_data.get('id', instance.id)
-	# 	instance.link = validated_data.get('link', instance.link)
-	# 	instance.name = validated_data.get('name', instance.name)
-	# 	instance.description = validated_data.get('description', instance.description)
-	# 	instance.save()
-	# 	return instance
-
-# EventSerializer._declared_fields['event_id'] = EventSerializer._declared_fields['id']
-# del EventSerializer._declared_fields['id']
+		# pass

@@ -11,8 +11,8 @@ class EventDeserializationTest(TestCase):
 
 	def setUp(self):
 		test_dir = os.path.dirname(__file__)
-		file_path = os.path.join(test_dir, 'event_no_fee_no_venue.json')
 
+		file_path = os.path.join(test_dir, 'event_no_fee_no_venue.json')
 		# QUESTION: is the REST Framework jsonparser function preferable to json.load? 
 		with open(file_path, 'rb') as f:
 			self.event_no_fee_no_venue = JSONParser().parse(f)
@@ -27,23 +27,24 @@ class EventDeserializationTest(TestCase):
 
 	def test_event_serialization_no_fee_no_venue(self):
 		serializer = EventSerializer(data=self.event_no_fee_no_venue)
-		self.assertTrue(serializer.is_valid(), msg=f'EventSerializer error: {serializer.errors}')
+		self.assertTrue(serializer.is_valid(), msg=f'Event no fee no venue serializer error: {serializer.errors}')
 		event = serializer.save()
 
 		self.assertIsInstance(event, Event)
 
 	def test_event_with_fee_serialization(self):
 		serializer = EventSerializer(data=self.event_with_fee)
-
-		self.assertTrue(serializer.is_valid(), msg=f'FeeSerializer error: {serializer.errors}')
-		event = serializer.save()
 		import pdb; pdb.set_trace()
+		self.assertTrue(serializer.is_valid(), msg=f'Event with fee serializer error: {serializer.errors}')
+		
+		event = serializer.save()
+		
 		self.assertIsInstance(event, Event)
 
 	def test_event_with_venue_serialization(self):
 		serializer = EventSerializer(data=self.event_with_venue)
 
-		self.assertTrue(serializer.is_valid(), msg=f'Serializer error: {serializer.errors}')
+		self.assertTrue(serializer.is_valid(), msg=f'Event with venue serializer error: {serializer.errors}')
 		event = serializer.save()
 		import pdb; pdb.set_trace()
 		self.assertIsInstance(event, Event)
