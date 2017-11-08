@@ -27,31 +27,29 @@ class EventDeserializationTest(TestCase):
 
 	def test_event_serialization_no_fee_no_venue(self):
 		serializer = EventSerializer(data=self.event_no_fee_no_venue)
-		self.assertTrue(serializer.is_valid(), 
-			msg=f'EventSerializer error: {serializer.errors}')
+		self.assertTrue(serializer.is_valid(), msg=f'EventSerializer error: {serializer.errors}')
 		event = serializer.save()
+
 		self.assertIsInstance(event, Event)
 
 	def test_event_with_fee_serialization(self):
 		serializer = EventSerializer(data=self.event_with_fee)
+
 		self.assertTrue(serializer.is_valid(), msg=f'FeeSerializer error: {serializer.errors}')
 		event = serializer.save()
+		import pdb; pdb.set_trace()
 		self.assertIsInstance(event, Event)
 
 	def test_event_with_venue_serialization(self):
 		serializer = EventSerializer(data=self.event_with_venue)
+
 		self.assertTrue(serializer.is_valid(), msg=f'Serializer error: {serializer.errors}')
 		event = serializer.save()
+		import pdb; pdb.set_trace()
 		self.assertIsInstance(event, Event)
 
-"""
-serializers.py
-save()
-203         validated_data = dict(
-204             list(self.validated_data.items()) +
-205             list(kwargs.items())
-206         )
-"""
+	def test_update_event_no_fee_no_venue(self):
+		pass
 
 
 

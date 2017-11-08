@@ -3,10 +3,10 @@ from volunteers.models import Volunteer
 
 
 class Event(models.Model):
-	# these are the fields of interest from the Meetup API events endpoint
-	# id is alphanumeric unique identifier per meetup API, not necessarily integer
-	# bad idea to use id keyword? if changed, serializer needs customization
-	id = models.IntegerField(primary_key=True)
+	# NOTE: id is alphanumeric unique identifier per meetup API, not necessarily integer
+	# QUESTION: How do I customize serializer to swap out keyword "id"?
+	# https://groups.google.com/forum/#!topic/django-rest-framework/BpD5qyQSQz4
+	event_id = models.IntegerField(primary_key=True)
 	link = models.URLField(max_length=200)
 	name = models.CharField(max_length=200)
 	description = models.TextField(default='')

@@ -24,6 +24,8 @@ def sync_events():
 		events_json = json.load(f)
 
 	for event_json in events_json:
+		event_json['event_id'] = event_json['id']
+		event_json.pop('id')
 		event_serializer = EventSerializer(data=event_json)
 
 		if event_serializer.is_valid():

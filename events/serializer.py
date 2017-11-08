@@ -8,39 +8,6 @@ class FeeSerializer(serializers.ModelSerializer):
 		model = Fee
 		fields = '__all__'
 
-	# link to event?
-	# def create(self, validated_data, event):
-	def create(self, validated_data):
-		return Fee.objects.create(**validated_data)
-
-	def update(self, instance, validated_data):
-		instance.amount = validated_data.get('amount', instance.id)
-		instance.currency = validated_data.get('currency', instance.link)
-		instance.save()
-		return instance
-
-
-class EventSerializer(serializers.ModelSerializer):
-
-	class Meta:
-		model = Event
-		fee = FeeSerializer(required=False)
-		fields = '__all__'
-
-	def create(self, validated_data):
-		
-		fee = Fee.objects.create()
-		return Event.objects.create(**validated_data)
-
-	def update(self, instance, validated_data):
-		instance.id = validated_data.get('id', instance.id)
-		instance.link = validated_data.get('link', instance.link)
-		instance.name = validated_data.get('name', instance.name)
-		instance.description = validated_data.get('description', instance.description)
-		instance.save()
-		return instance
-
-
 
 class VenueSerializer(serializers.ModelSerializer):
 
@@ -49,20 +16,45 @@ class VenueSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 
-	# link to event?
-	def create(self, validated_data):
-		return Venue.objects.create(**validated_data)
+class EventSerializer(serializers.ModelSerializer):
 
-	def update(self, instance, validated_data):
-		instance.event = validated_data.get('event', instance.event)
-		instance.name = validated_data.get('name', instance.name)
-		instance.lat = validated_data.get('lat', instance.lat)
-		instance.lon = validated_data.get('lon', instance.lon)
-		instance.address_1 = validated_data.get('address_1', instance.address_1)
-		instance.address_2 = validated_data.get('address_2', instance.address_2)
-		instance.address_3 = validated_data.get('address_3', instance.address_3)
-		instance.city = validated_data.get('city', instance.city)
-		instance.country = validated_data.get('country', instance.country)
-		instance.state = validated_data.get('state', instance.state)
-		instance.save()
-		return instance
+	class Meta:
+		model = Event
+		# event_id = serializers.IntegerField(source='id')
+		fee = FeeSerializer(required=False)
+		venue = VenueSerializer(required=False)
+		fields = '__all__'
+
+	def create(self, validated_data):
+		fee, venue = False, False
+		import pdb; pdb.set_trace()
+
+		if 'fee' in validated_data.keys():
+			fee_data = validated_data.pop('fee')
+			fee = True
+
+		if 'venue' in validated_data.keys():
+			venue_data = validated_data.pop('venue')
+			venue = True
+
+		event = Event.objects.create(**validated_data)
+
+		if fee:
+			Fee.objects.create(event=event, **fee_data)
+
+		if venue:
+			Venue.objects.create(event=event, **venue_data)
+
+		return event
+
+
+	# def update(self, instance, validated_data):
+	# 	instance.id = validated_data.get('id', instance.id)
+	# 	instance.link = validated_data.get('link', instance.link)
+	# 	instance.name = validated_data.get('name', instance.name)
+	# 	instance.description = validated_data.get('description', instance.description)
+	# 	instance.save()
+	# 	return instance
+
+# EventSerializer._declared_fields['event_id'] = EventSerializer._declared_fields['id']
+# del EventSerializer._declared_fields['id']
