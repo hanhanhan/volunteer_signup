@@ -1,6 +1,8 @@
+from time import time
 from django.db import models
 from volunteers.models import Volunteer
-
+# NOTE: Add mixin to log issues saving
+# https://stackoverflow.com/questions/38041310/log-all-save-update-delete-actions-in-all-django-models
 
 class Event(models.Model):
 	# NOTE: id is alphanumeric unique identifier per meetup API, not necessarily integer
@@ -12,7 +14,8 @@ class Event(models.Model):
 	description = models.TextField(default='')
 	duration = models.PositiveIntegerField(null=True)
 	rsvp_limit = models.SmallIntegerField(null=True)
-	time = models.BigIntegerField(null=True)
+	# event start time in milliseconds since epoch
+	time = models.BigIntegerField(null=True) 
 	waitlist_count = models.BigIntegerField(null=True)
 	yes_rsvp_count = models.SmallIntegerField(null=True)
 	volunteers_requested = models.SmallIntegerField(null=True)
@@ -22,13 +25,6 @@ class Event(models.Model):
 	local_time = models.CharField(max_length=20, default='')
 	updated = models.PositiveIntegerField(null=True)
 	utc_offset = models.PositiveIntegerField(null=True)	
-
-	# volunteers = models.ManyToManyField(
- #        'volunteers.Volunteer',
- #        through='Event_Volunteer',
- #        through_fields=('username'),
- #    )
-
 
 	def __str__(self):
 		return self.name
