@@ -1,0 +1,38 @@
+{
+  "created": 1507050830000,
+  "duration": 14400000,
+  "fee": {
+    "accepts": "wepay",
+    "amount": 120.0,
+    "currency": "USD",
+    "description": "per person",
+    "label": "price",
+    "required": true
+  },
+  "name": "Introduction to Ruby for Complete Beginners (Two day weekend class)",
+  "rsvp_limit": 15,
+  "status": "upcoming",
+  "time": 1511035200000,
+  "local_date": "2017-11-18",
+  "local_time": "12:00",
+  "updated": 1507054017000,
+  "utc_offset": -28800000,
+  "waitlist_count": 0,
+  "yes_rsvp_count": 4,
+  "group": {
+    "created": 1389723152000,
+    "name": "Girl Develop It Los Angeles",
+    "id": 12114102,
+    "join_mode": "open",
+    "lat": 34.06999969482422,
+    "lon": -118.3499984741211,
+    "urlname": "Girl-Develop-It-Los-Angeles",
+    "who": "Nerdettes",
+    "localized_location": "Los Angeles, CA",
+    "region": "en_US"
+  },
+  "link": "https://www.meetup.com/Girl-Develop-It-Los-Angeles/events/243887401/",
+  "description": "<p>Join us for this <b>two-day </b>workshop introducing <b>Ruby</b>, a programming language that's popular for web development with the Ruby on Rails framework, used by companies like Hulu, Airbnb, and Indiegogo! </p> <p>This class will meet for <b><i>two </i>4-hour sessions, Saturday Nov 18th and Sunday Nov 19th</b>, and <i>both </i>sessions are covered for the $120 class fee. </p> <p>\n\n\n\nBig thanks to <b><a href=\"https://www.fender.com/\">Fender Musical Instruments</a> </b>(yes, <i>that </i>Fender!) for sponsoring us at their beautiful Hollywood office and providing snacks! (Fender has a women's group with female programmers, UX/UI designers, product managers and more, and they want to give back to the community!)</p> <p>\n\n\n<b>What You'll Learn</b></p> <p>• Basics of the command line and why we use it </p> <p>• Strings, arrays, variables, objects, loops, files </p> <p>• Object-oriented concepts like methods, instances, and classes</p> <p>• How to run your Ruby code interactively (irb) or from a file</p> <p>• Writing command line programs to run on your own computer</p> <p>We will be getting your machines set up on the first class, so please be sure to attend. We will <i>not</i> be taking time in the following classes to set up your machines.</p> <p>\n\n\n<b>Schedule:</b></p> <p>• Class 1: Saturday, November 18th, 12pm - 4pm</p> <p>• Class 2: Sunday, November 19th, 12pm - 4pm</p> <p><i><b>*** Both classes are covered for the $120 class fee. Please only RSVP if you can attend both sessions.</b></i></p> <p>\n\n\n<b>Prerequisites</b> </p> <p>• This class is open to <i>complete beginner</i> with no prior coding experience! :)</p> <p><br/>• Knowledge of HTML/CSS is helpful but not required. We highly recommend first taking our <a href=\"https://www.meetup.com/Girl-Develop-It-Los-Angeles/events/243382472/\">Intro to HTML/CSS class</a> if you're new to HTML and CSS.</p> <p>\n\n\n<b>What to Bring </b></p> <p><br/>Please bring a laptop (or borrow one, see below!)* and charger to class. Power outlets and wifi will be provided. You may also wish to bring a notepad and pen/pencil for taking notes.</p> <p>We'll be using a modern web browser and a text editor in class. If you don't already have these installed, please install them before you come to class.</p> <p>For web browsers, we recommend <a href=\"http://firefox.com/\">Mozilla Firefox</a> or <a href=\"http://google.com/chrome\">Google Chrome</a>. For a text editor, we recommend <a href=\"https://www.sublimetext.com/\">Sublime Text 3</a>. Note that you do not have to purchase Sublime Text 3. If you download the free evaluation version that will be good enough for class.</p> <p><b>* Request to borrow a laptop: </b>No laptop? We have a limited number of laptops we can loan to students during class. Please fill out our<b> <a href=\"https://docs.google.com/forms/d/1-HHF9IB2VlYVRivz5Zn7LwkjQAYkJLZsuW0YM4hh60U/viewform\">Laptop Request form</a></b> to let us know you need to borrow one!</p> <p>\n\n\n<b>Questions? </b></p> <p><br/>We're here to help! If you have additional questions or would like to talk further before signing up for a class, please contact us at losangeles [at] girldevelopit dot com. </p> <p>\n\n\n<b>About Our Teacher: Laura Kinson</b></p> <p>Currently a software engineer at Fender, Laura Kinson is a self-taught developer proficient in JavaScript and Ruby. By night, she's also a yoga instructor! She has also worked in social media and digital outreach on behalf of entertainment brands, planning large-scale events and managing media relations.</p> <p>\n\n\n<b>No Refunds</b></p> <p><br/>If you can no longer attend the class you signed up and paid for, your payment will be donated to the local chapter scholarship fund. You can help another woman in need!</p> <p>\n\n\n<b>Other Disclaimers</b></p> <p>Our program and curriculum are geared toward adults over the age of 18. At this time we do not accept minors as students in our courses and workshops.</p> <p>If you have any accessibility issues we should know about, please email us at losangeles [at] girldevelopit dot com. We want to make sure everyone can participate!</p> <p>Our events are women-inclusive, not women-exclusive. Anyone over the age of 18 is welcome to attend our events and classes. <b>All attendees are expected to abide by the <a href=\"https://www.girldevelopit.com/code-of-conduct\">Girl Develop It Code of Conduct.</a></b> </p> <p><b><br/></b></p> <p><b>Volunteer as a Teacher Assistant</b></p> <p>If you're already familiar with Git and GitHub, you can earn free classes by participating as a Teaching Assistant. Every hour you spend volunteering as a TA earns you a free hour of class time! Get more details and sign up to be a TA by filling out this form: <a href=\"https://goo.gl/forms/R8yIjbvQBZoFDAnJ2\"><a href=\"https://goo.gl/forms/R8yIjbvQBZoFDAnJ2\" class=\"linkified\">https://goo.gl/forms/R8yIjbvQBZoFDAnJ2</a></a></p> <p><b><br/></b></p> <p><b>Directions / Transportation</b></p> <p>Fender is located within Columbia Square on Sunset &amp; Gower.</p> <p>It's also <b>right off the Hollywood / Vine Metro stop!</b> And remember, if you don't live near a Metro stop, you can always park your car at <a href=\"http://www.metro.net/around/paid_parking/\">Metro's Park &amp; Ride lots</a> and then take the train to Hollywood.</p> <p><b>Parking and Validation</b></p> <p>There are two entrances to the garage, one on Gower and one on El Centro. Please self park and take the stairs or elevators up to the 1st floor.</p> <p><i><b>*** We will email you before the class to give you contact info, in case you have trouble finding us.</b></i></p> <p>\n\n\n<b>Our Sponsor:</b></p> <p>Big thanks to <a href=\"https://www.fender.com/\"><b>Fender Musical Instruments</b></a>for sponsoring us at their beautiful Hollywood office and providing snacks!</p> <p><img src=\"https://secure.meetupstatic.com/photos/event/b/7/9/0/600_465046992.jpeg\" /></p> <p>Fender has a women's group with female programmers, UX/UI designers, product managers and more, and they want to help the larger women in tech community!</p> ",
+  "visibility": "public",
+  "id": "243887401"
+}
