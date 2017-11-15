@@ -6,9 +6,7 @@ from volunteers.models import Volunteer
 
 class Event(models.Model):
 	# NOTE: id is alphanumeric unique identifier per meetup API, not necessarily integer
-	# QUESTION: How do I customize serializer to swap out keyword "id"?
-	# https://groups.google.com/forum/#!topic/django-rest-framework/BpD5qyQSQz4
-	event_id = models.IntegerField(primary_key=True)
+	event_id = models.IntegerField(unique=True)
 	link = models.URLField(max_length=200)
 	name = models.CharField(max_length=200)
 	description = models.TextField(default='')
@@ -31,13 +29,13 @@ class Event(models.Model):
 
 
 class Fee(models.Model):
-	event = models.OneToOneField(to=Event, on_delete=models.CASCADE, primary_key=True, related_name='fee')
+	event = models.OneToOneField(to=Event, on_delete=models.CASCADE)
 	amount = models.IntegerField(null=True)
 	currency = models.CharField(max_length=10, default='')
 
 
 class Venue(models.Model):
-	event = models.OneToOneField(to=Event, on_delete=models.CASCADE, primary_key=True, related_name='venue')
+	event = models.OneToOneField(to=Event, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200)
 	lat = models.DecimalField(decimal_places=20, max_digits=25)
 	lon = models.DecimalField(decimal_places=20, max_digits=25)
@@ -50,7 +48,7 @@ class Venue(models.Model):
 
 
 class Event_Volunteer(models.Model):
-	event = models.ForeignKey(Event, on_delete=models.CASCADE)
+	event = models.ForeignKey(Event, on_delete=models.CASCADE, primary_key=True, to_field='event_id')
 	volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
 	showed = models.BooleanField()
 	signup_date = models.DateTimeField(auto_now_add=True)

@@ -47,16 +47,12 @@ def get_modified_events(api_events, db_events):
 	return modified_events
 
 
-def get_new_events(api_events, db_events):
-	db_event_ids = {event.event_id for event in db_events}
-	api_event_ids = {event["id"] for event in api_events}
-	new_events = api_event_ids - db_event_ids
-	return new_events
-
-
 def update_event(api_event):
-	""" Create event in database from dictionary pulled from Meetup API. No return value.
+	""" Update or create event in database. Input is from dictionary pulled from Meetup API. No return value.
 	"""
+	fee = None
+	venue = None
+
 	try:
 		event = Event.objects.get(event_id=api_event["id"])
 	except Event.DoesNotExist:
@@ -69,24 +65,24 @@ def update_event(api_event):
 		except:
 			venue = Venue()
 
-		filtered_api = {k: v for k, v in api_event["venue"] if k in VENUE_FIELDS}
+		filtered_api = {k: v for k, v in api_event["venue"].items() if k in VENUE_FIELDS}
 		filtered_api["event"] = event
 
-		for k, v in filtered_api:
+		for k, v in filtered_api.items():
 			setattr(venue, k, v)
 
 		api_event.pop("venue")
 
 	if "fee" in api_event:
 		# NOTE: duplicate from above. DRY -> turn into function?
-		filtered_api = {k: v for k, v in api_event["fee"] if k in FEE_FIELDS}
+		filtered_api = {k: v for k, v in api_event["fee"].items() if k in FEE_FIELDS}
 		filtered_api["event"] = event
 		try:
 			fee = Fee.objects.get(event=event)
 		except Fee.DoesNotExist:
 			fee = Fee()
 
-		for k, v in filtered_api:
+		for k, v in filtered_api.items():
 			setattr(fee, k, v)
 
 		api_event.pop("fee")
@@ -94,18 +90,20 @@ def update_event(api_event):
 	# Replace python keyword from dictionary.
 	api_event["event_id"] = api_event["id"]
 
+	# Only use the model's fields from the api data
 	for key in api_event:
-		filtered_api = {k: v for k, v in api_event if k in EVENT_FIELDS}
-
+		filtered_api = {k: v for k, v in api_event.items() if k in EVENT_FIELDS}
 	for key, value in filtered_api.items():
 		setattr(event, key, value)
 
+	# Save event before saving related 
 	event.save()
 
 	if venue:
 		venue.save()
 	if fee:
 		fee.save()
+	import pdb; pdb.set_trace()
 
 
 def sync_with_api():
@@ -116,10 +114,7 @@ def sync_with_api():
 	# QUESTION: Better name for updated + new? handle together?
 	modified_events = get_modified_events(api_events, db_events)
 	# QUESTION: could I use map here? it's lazy and I don't need return value, so I'm not sure how to make it evaluate
-	for event in new_events:
-		create_event(event)
-
-	for event in updated_events:
+	for event in modified_events:
 		update_event(event)
 
 
