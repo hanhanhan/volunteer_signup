@@ -40,7 +40,7 @@ def get_upcoming_db_events():
 
 
 def get_modified_events(api_events, db_events):
-	db_events = {(event.event_id, event.updated) for event in db_events}
+	db_events = {(event.meetup_id, event.updated) for event in db_events}
 	api_events = {(event["id"], event["updated"]) for event in api_events}
 
 	modified_events = {event[0] for event in (api_events - db_events)}
@@ -54,7 +54,7 @@ def update_event(api_event):
 	venue = None
 
 	try:
-		event = Event.objects.get(event_id=api_event["id"])
+		event = Event.objects.get(meetup_id=api_event["id"])
 	except Event.DoesNotExist:
 		event = Event()
 
@@ -88,7 +88,7 @@ def update_event(api_event):
 		api_event.pop("fee")
 
 	# Replace python keyword from dictionary.
-	api_event["event_id"] = api_event["id"]
+	api_event["meetup_id"] = api_event["id"]
 
 	# Only use the model's fields from the api data
 	for key in api_event:
@@ -100,10 +100,12 @@ def update_event(api_event):
 	event.save()
 
 	if venue:
+		# venue.event_id = event.id
 		venue.save()
 	if fee:
+		# fee.event_id = event.id
 		fee.save()
-	import pdb; pdb.set_trace()
+	
 
 
 def sync_with_api():

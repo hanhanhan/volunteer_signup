@@ -16,11 +16,11 @@ class EventDeserializationTest(TestCase):
 			self.api_event = json.load(f)
 
 	def test_update_event(self):
+		import pdb; pdb.set_trace()
 		update_event(self.api_event)
 		event = Event.objects.all().first()
 		api_id = int(self.api_event["id"])
-		import pdb; pdb.set_trace()
-		self.assertEquals(api_id, event.event_id)
+		self.assertEquals(api_id, event.meetup_id)
 
 
 
