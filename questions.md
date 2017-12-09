@@ -1,7 +1,42 @@
+# For Codementor 12/5/17
+
+Caution - putting github/fb apps in db for allauth, and putting db in git, and app in github...
+
+Fixtures?
+
+Django testrunner w/selenium function tests?
+Name my functional test functional_test? test_functional? folder?
+leverage allauth tests?
+https://github.com/pennersr/django-allauth/blob/master/allauth/account/tests.py
+
+So many ways to do it.....LiveServerTestCase/Static+django test runner (location to run from	?), unittest and no django test runner
+
+Getting it working FB, GitHub login
+
+Am I commenting the right way to be able to generate documentation later?
+
+Outline next steps
+
+-managment command for scheduling asking cron job
+
+
+
+
 # allauth site?
 In django admin, it says:
 Add a Site for your domain, matching settings.SITE_ID (django.contrib.sites app). 
 Can I use localhost? Made up name? How is this used?
+
+https://developers.facebook.com/apps/1483671008393141/dashboard/
+
+URL Blocked: This redirect failed because the redirect URI is not whitelisted in the app’s Client OAuth Settings. Make sure Client and Web OAuth Login are on and add all your app domains as Valid OAuth Redirect URIs.
+
+https://developers.facebook.com/apps/1483671008393141/dashboard/
+
+
+
+
+https://github.com/settings/applications/603836
 
 # How to mix custom templates + default?
 How can I use allauth's (or django's) templates with my own base template, styling?
@@ -33,6 +68,9 @@ better ways to figure stuff out
 customize default templates
 
 ---
+python manage.py test
+python manage.py test functional_tests
+----
 shortcut to see json nice in sublime prettyjson
 ipdb
 jump to definition
@@ -41,3 +79,8 @@ sublime snippets
 python slack
 var(x) instead of dir(x)
 
+me@me.com
+developit
+
+eleanor
+pw: roosevelt

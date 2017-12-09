@@ -1,6 +1,8 @@
 db.sqlite3-journal
+db.sqlite3
 .DS_Store
 *.pyc
 .env
 */migrations/
 static/bootstrap/
+fixtures

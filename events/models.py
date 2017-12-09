@@ -5,8 +5,10 @@ from volunteers.models import Volunteer
 # https://stackoverflow.com/questions/38041310/log-all-save-update-delete-actions-in-all-django-models
 
 class Event(models.Model):
-	# NOTE: id is alphanumeric unique identifier per meetup API, not necessarily integer
-	meetup_id = models.IntegerField(unique=True)
+	# event should have a forein key to fee, and to venue
+	# to reuse venue
+	# NOTE: id is alphanumeric unique identifier per meetup API
+	meetup_id = models.CharField(max_length=20)
 	link = models.URLField(max_length=200)
 	name = models.CharField(max_length=200)
 	description = models.TextField(default='')
@@ -23,7 +25,7 @@ class Event(models.Model):
 	local_time = models.CharField(max_length=20, default='')
 	updated = models.PositiveIntegerField(null=True)
 	utc_offset = models.PositiveIntegerField(null=True)	
-
+	
 	def __str__(self):
 		return self.name
 
@@ -48,7 +50,7 @@ class Venue(models.Model):
 
 
 class Event_Volunteer(models.Model):
-	event = models.ForeignKey(Event, on_delete=models.CASCADE, primary_key=True)
+	event = models.ForeignKey(Event, on_delete=models.CASCADE)
 	volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
 	showed = models.BooleanField()
 	signup_date = models.DateTimeField(auto_now_add=True)

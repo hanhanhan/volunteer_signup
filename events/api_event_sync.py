@@ -17,20 +17,10 @@ VENUE_FIELDS = {field.name for field in Venue._meta.get_fields()}
 logger = logging.getLogger(__name__)
 
 
-def get_event_data():
-	r = requests.get(URL)
-	with open(JSON_FILE, 'w') as f:
-		json.dump(r.json(), f)
-
-
 # QUESTION: How do I rearrange this so I can fake data in tests?
 def get_events_from_api():
-	if not os.path.exists(JSON_FILE):
-		get_event_data()
-
-	with open('events.json', 'rb') as f:
-		events = json.load(f)
-		return events
+	r = requests.get(URL)
+	return r.json()
 
 
 def get_upcoming_db_events():
@@ -40,10 +30,10 @@ def get_upcoming_db_events():
 
 
 def get_modified_events(api_events, db_events):
-	db_events = {(event.meetup_id, event.updated) for event in db_events}
-	api_events = {(event["id"], event["updated"]) for event in api_events}
+	db_event_set = {(event.meetup_id, event.updated) for event in db_events}
+	api_event_set = {(event["id"], event["updated"]) for event in api_events}
 
-	modified_events = {event[0] for event in (api_events - db_events)}
+	modified_events = {event[0] for event in (api_event_set - db_event_set)}
 	return modified_events
 
 
@@ -89,6 +79,7 @@ def update_event(api_event):
 
 	# Replace python keyword from dictionary.
 	api_event["meetup_id"] = api_event["id"]
+	api_event.pop("id")
 
 	# Only use the model's fields from the api data
 	for key in api_event:
@@ -100,12 +91,11 @@ def update_event(api_event):
 	event.save()
 
 	if venue:
-		# venue.event_id = event.id
+		venue.event_id = event.id
 		venue.save()
 	if fee:
-		# fee.event_id = event.id
+		fee.event_id = event.id
 		fee.save()
-	
 
 
 def sync_with_api():
